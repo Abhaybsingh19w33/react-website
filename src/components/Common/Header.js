@@ -5,7 +5,6 @@ class Header extends Component {
         return (
             // style={{ backgroudImage: `url("${this.props.image}")` }}
             <header className="masthead">
-{/* {this.props.title === "About Us" ? <div style={{ backgroundImage: 'url("../asset/img/")'}}></div>} */}
                 <div className="container">
                     <div className="masthead-subheading">{this.props.title}</div>
                     <div className="masthead-heading text-uppercase">{this.props.subtitle}</div>

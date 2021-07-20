@@ -8,16 +8,8 @@ function App() {
       <Router>
         <PageWrapper>
           <Route exact path="/" component={Home} />
-          <Route path="/a" render={() => {
-            return (
-              <h1>I am /a route</h1>
-            )
-          }} />
-          <Route path="/ab" render={() => {
-            return (
-              <h1>I am /ab route</h1>
-            )
-          }} />
+          {/* <Route path="/a" render={() => {return (<h1>I am /a route</h1>)}} /> */}
+          {/* <Route path="/ab" render={() => {return (<h1>I am /ab route</h1>)}} /> */}
           <Route path="/about" component={About} />
         </PageWrapper>
       </Router>
