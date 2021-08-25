@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Field from '../Common/Field';
+import { withFormik } from 'formik';
 // import Header from '../Common/Header';
 // import Team from '../Common/Team';
 // import Timeline from '../Common/Timeline';
@@ -19,18 +20,6 @@ const fields = {
 }
 
 class Contact extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            phone: '',
-            message: ''
-        }
-    }
-    submitForm = (e) => {
-        alert("Form Submitted. Thank You very much");
-    }
     render() {
         return (
             //< !--Contact-- >
@@ -40,16 +29,28 @@ class Contact extends Component {
                         <h2 className="section-heading text-uppercase">Contact Us</h2>
                         <h3 className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                     </div>
-                    <form id="contactForm" onClick={e => this.submitForm(e)}>
+                    <form id="contactForm" onSubmit={this.props.handleSubmit}>
                         <div className="row align-items-stretch mb-5">
                             {
                                 fields.section.map((section, sectionIndex) => {
                                     return (
                                         <div className="col-md-6" key={sectionIndex}>
+                                            {/* {section.map((field) => {
+                                                // console.log(field);
+                                                // console.log(field.name);
+                                                // console.log("this.props.value");
+                                                // console.log(this.props.values);
+                                                console.log("this.props");
+                                                console.log(this.props.handleChange);
+                                            })} */}
                                             {section.map((field, i) => {
                                                 return <Field {...field} key={i}
-                                                    value={this.state[field.name]}
-                                                    onChange={e => this.setState({ [field.name]: e.target.value })}
+                                                    value={this.props.values[field.name]}
+                                                    name={field.name}
+                                                    onChange={this.props.handleChange}
+                                                    onBlur={this.props.handleBlur}
+                                                    touched={this.props.touched[field.name]}
+                                                    error={this.props.errors[field.name]}
                                                 />
                                             })}
                                         </div>
@@ -60,8 +61,7 @@ class Contact extends Component {
                         <div className="text-center">
                             <button
                                 className="btn btn-primary btn-xl text-uppercase enabled"
-                                type="submit"
-                            >
+                                type="submit">
                                 Send Message
                             </button>
                         </div>
@@ -71,9 +71,25 @@ class Contact extends Component {
         );
     }
 }
-export default Contact;
-
-
-
-
-
+export default withFormik({
+    mapProsToValues: () => ({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+    }),
+    // validate: (values) => {
+    //     const errors = {};
+    //     Object.keys(values).map(v => {
+    //         if (!values[v]) {
+    //             errors[v] = "Required";
+    //         }
+    //     })
+    //     return errors;
+    // },
+    handleSubmit: (values, { setSubmitting }) => {
+        console.log("Values ")
+        console.log(values);
+        alert("You submitted the form", JSON.stringify(values));
+    }
+})(Contact);
