@@ -1,7 +1,7 @@
 import PageWrapper from './components/PageWrapper';
 import Home from './components/Pages/Home';
 import About from './components/Pages/About';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Contact from './components/Pages/Contact';
 function App() {
   return (
